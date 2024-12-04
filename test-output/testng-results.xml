@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="8" passed="7" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-12-03T16:49:46 ICT" name="Default Suite" finished-at="2024-12-03T16:52:32 ICT" duration-ms="165619">
+    <groups>
+    </groups>
+    <test started-at="2024-12-03T16:49:46 ICT" name="KiemThu" finished-at="2024-12-03T16:52:32 ICT" duration-ms="165619">
+      <class name="com.nhom4.ProductTest">
+        <test-method is-config="true" signature="openBrowser()[pri:0, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:49:46 ICT" name="openBrowser" finished-at="2024-12-03T16:49:50 ICT" duration-ms="3690" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method signature="loginTest()[pri:1, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:49:50 ICT" name="loginTest" finished-at="2024-12-03T16:49:52 ICT" duration-ms="2066" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:49:52 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:49:53 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="1455" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[25,000,000]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Bắt buộc nhập tên sản phẩm]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:49:53 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:50:55 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="61516" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[@@@@]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[25,000,000]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Tên sản phẩm không hợp lệ]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:50:55 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:50:56 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="1472" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Bo Mạch Chủ ASUS ROG STRIX]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Giá phải là số]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:50:56 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:51:27 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="31092" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Bo Mạch Chủ ASUS ROG STRIX]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[0]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Giá phải lớn hơn 0]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[expected [Giá phải lớn hơn 0] but found [Error
+An unexpected error occurred
+OK]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: expected [Giá phải lớn hơn 0] but found [Error
+An unexpected error occurred
+OK]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertEqualsImpl(Assert.java:150)
+at org.testng.Assert.assertEquals(Assert.java:132)
+at org.testng.Assert.assertEquals(Assert.java:656)
+at org.testng.Assert.assertEquals(Assert.java:666)
+at com.nhom4.ProductTest.updateProductTest(ProductTest.java:255)
+at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at com.intellij.rt.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:65)
+at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:105)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:51:28 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:51:29 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="1366" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Bo Mạch Chủ ASUS ROG STRIX]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[25,000,000]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[abc]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Số lượng phải là số]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:51:29 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:51:30 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="1005" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Bo Mạch Chủ ASUS ROG STRIX]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[25,000,000]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Số lượng phải là số]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method signature="updateProductTest(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:2, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:51:30 ICT" name="updateProductTest" data-provider="updateProductData" finished-at="2024-12-03T16:52:31 ICT" depends-on-methods="com.nhom4.ProductTest.loginTest" duration-ms="61407" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Bo Mạch Chủ ASUS ROG STRIX]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[30,000,000]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Success Product updated successfully! OK]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateProductTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.nhom4.ProductTest@641147d0]" started-at="2024-12-03T16:52:31 ICT" name="tearDown" finished-at="2024-12-03T16:52:32 ICT" duration-ms="439" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.nhom4.ProductTest -->
+    </test> <!-- KiemThu -->
+  </suite> <!-- Default Suite -->
+</testng-results>

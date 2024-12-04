@@ -9,10 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -20,7 +17,7 @@ public class LoginTest {
     private WebDriver driver;
     private final String url = "http://localhost:3000/login";
 
-    @BeforeClass
+    @BeforeMethod
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -28,7 +25,7 @@ public class LoginTest {
         driver.navigate().to(url);
     }
 
-    @AfterClass
+    @AfterMethod
     public void closeBrowser() {
         System.out.println("Closing browser");
         if (driver != null) {
@@ -80,7 +77,7 @@ public class LoginTest {
     @DataProvider(name = "loginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"", "", "Tên tài khoản hoặc mật khẩu rỗng. Vui lòng nhập đầy đủ"},
+
                 {"aaa", "123456", "Đăng nhập không thành công\n" +
                         "Tài khoản hoặc mật khẩu không đúng\n" +
                         "OK"},
@@ -105,6 +102,7 @@ public class LoginTest {
                 {"", "", "Đăng nhập không thành công\n" +
                         "Tài khoản hoặc mật khẩu không đúng\n" +
                         "OK"},
+                {"", "", "Tên tài khoản hoặc mật khẩu rỗng. Vui lòng nhập đầy đủ"},
 //                {"admin", "123", "Đăng nhập thành công"},
         };
     }

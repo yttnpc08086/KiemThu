@@ -2,6 +2,7 @@ package com.nhom4;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -35,63 +36,73 @@ public class RegisterTest {
         }
     }
 
-//    @Test(priority = 2)
-//    public void testValidRegister() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10000));
-//
-//        WebElement registerLink = driver.findElement(By.xpath("//button[contains(text(),'Đăng ký')]"));
-//        registerLink.click();
-//        WebElement registerForm = driver.findElement(By.xpath("//h2[contains(text(),'Đăng Ký')]"));
-//        if (registerForm.isDisplayed()) {
-//            Register("Trần Thị Như Ý", "tranthinhuy28012020@gmail.com", "0367173020", "nhuy", "123", "123");
-//            System.out.println("Hiện form đăng kí");
-//            driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-//            System.out.println("Chờ mã OTP");
-//        }
-//        try {
-//            // Wait for success message to appear
-//            WebElement dialogElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='Toastify__toast-container Toastify__toast-container--top-right']")));
-//            Assert.assertTrue(dialogElement.isDisplayed(), "Thông báo thành công hiển thị.");
-//            System.out.println("Test case passed");
-//        } catch (Exception e) {
-//            Assert.fail("Không tìm thấy thông báo thành công.", e);
-//        }
-//    }
 
     @Test(dataProvider = "RegisterData", priority = 1)
     public void testRegisterFail(String fullname, String email, String phone, String username, String password, String passConfirm, String expectedMessage) {
-        Register(fullname, email, phone, username, password, passConfirm);
 
+        // Mở form đăng ký
+        WebElement registerLink = driver.findElement(By.xpath("//button[contains(text(),'Đăng ký')]"));
+        registerLink.click();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement registerForm = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Đăng Ký')]")));
 
+
+        // Kiểm tra form hiển thị
+        Assert.assertTrue(registerForm.isDisplayed(), "Form đăng ký không hiển thị!");
+
+        // Điền thông tin đăng ký
+        Register(fullname, email, phone, username, password, passConfirm);
         try {
-            // Wait for error dialog to appear
-            WebElement dialogElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='dialog']")));
-            String actualMessage = dialogElement.getText();
-            Assert.assertEquals(actualMessage, expectedMessage);
+            // Chờ thông báo xuất hiện
+            WebElement toastMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.cssSelector(".Toastify__toast.Toastify__toast-theme--light")));
 
-            // Click OK button if available
-            WebElement okButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[normalize-space()='OK']")));
-            okButton.click();
-        } catch (Exception e) {
-            Assert.fail("Dialog không xuất hiện hoặc không thể tương tác với nút 'OK'.", e);
+            // Kiểm tra loại thông báo (thành công hay thất bại)
+            String toastClass = toastMessage.getAttribute("class");
+            String messageActual = toastMessage.getText();
+
+            if (toastClass.contains("Toastify__toast--success")) {
+                Assert.assertEquals(messageActual, expectedMessage, "Thông báo thành công không khớp!");
+                System.out.println("Thành công: " + messageActual);
+            } else if (toastClass.contains("Toastify__toast--error")) {
+                Assert.assertEquals(messageActual, expectedMessage, "Thông báo thất bại không khớp!");
+                System.out.println("Thất bại: " + messageActual);
+            } else {
+                Assert.fail("Không xác định loại thông báo!");
+            }
+        } catch (TimeoutException e) {
+            Assert.fail("Không có thông báo hiển thị!", e);
         }
     }
+
 
     @DataProvider(name = "RegisterData")
     public Object[][] RegisterData() {
         return new Object[][]{
-                {"", "nguyenvana@gmail.com", "0987654321", "nguyenvana", "password123", "password123", "Thông tin không hợp lệ"}, // Invalid email format
-                {"Trần Thị Như Ý", "nguyenvana@gmail.com", "123456789", "admin", "1234", "1234", "Tài khoản đã tồn tại"}, // Username exists
-                {"Trần Thị Như Ý", "nguyenvana@gmail.com", "123456789", "", "1234", "123", "Mật khẩu không khớp"} // Password mismatch
+                {"", "nguyenvana@gmail.com", "0987654321", "nguyenvana", "123", "123", "Vui lòng nhập họ tên của bạn"}, 
+                {"Nguyễn Văn A", "", "0987654321", "nguyenvana", "123", "123", "Vui lòng nhập email của bạn"},
+                {"Nguyễn Văn A", "nguyenvana", "0987654321", "nguyenvana", "123", "123", "Email không hợp lệ"},
+                {"Nguyễn Văn A", "tranthinhuy28012020@gmail.com", "0987654321", "nguyenvana", "123", "123", "Email đã được sử dụng"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "", "nguyenvana", "123", "123", "Vui lòng nhập số điện thoại của bạn"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "098765432X", "nguyenvana", "123", "123", "Số điện thoại không hợp lệ"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0367172020", "nguyenvana", "123", "123", "Số điện thoại đã tồn tại"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "09876543211", "nguyenvana", "123", "123", "Số điện thoại không hợp lệ"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "", "123", "123", "Vui lòng nhập tài khoản của bạn"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "admin", "123", "123", "Tên tài khoản đã tồn tại"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "nguyenvana", "", "123", "Vui lòng nhập mật khẩu"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "nguyenvana", "123", "123", "Mật khẩu phải có ít nhất 6 ký tự"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "nguyenvana", "123", "1234", "Mật khẩu không khớp"},
+                {"Nguyễn Văn A", "nguyenvana@gmail.com", "0987654321", "###", "123", "123", "Tài khoản không hợp lệ, chỉ được chứa chữ cái, số và dấu gạch dưới"},
+
+
         };
     }
 
     private void Register(String fullname, String email, String phone, String username, String password, String passConfirm) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         try {
             // Locate and fill in the registration fields
+
             WebElement fullnameField = driver.findElement(By.xpath("//input[@placeholder='Nhập họ tên của bạn']"));
             WebElement emailField = driver.findElement(By.xpath("//input[@placeholder='Nhập email của bạn']"));
             WebElement phoneField = driver.findElement(By.xpath("//input[@placeholder='Nhập số điện thoại của bạn']"));
@@ -121,6 +132,7 @@ public class RegisterTest {
             registerButton.click();
         } catch (Exception e) {
             Assert.fail("Không tìm thấy các trường cần thiết để đăng kí.", e);
+            e.printStackTrace();
         }
     }
 }

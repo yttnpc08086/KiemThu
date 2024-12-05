@@ -118,26 +118,26 @@ public class ProductTest {
     public Object[][] productCreateData() {
         return new Object[][]{
 //                để trống tên
-                {"", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "Mainboard MSI PRO H610M-S WIFI DDR4", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Bắt buộc nhập tên sản phẩm"},
+                {"", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "Mainboard MSI PRO H610M-S WIFI DDR4", "D:\\image\\ssdicon.webp", "Bắt buộc nhập tên sản phẩm"},
 //                tên trùng
-                {"Kingston 4GB RAM", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Tên sản phẩm đã tồn tại!"},
+                {"Kingston 4GB RAM", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\ssdicon.webp", "Tên sản phẩm đã tồn tại!"},
 //                trống giá
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Giá phải là số"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\ssdicon.webp", "Giá phải là số"},
 //               Nhập ký tự không phải số
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "abc", "50", "Mainboard", "Intel", "Còn hoạt động", "mainboard", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Giá phải là số"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "abc", "50", "Mainboard", "Intel", "Còn hoạt động", "mainboard", "D:\\image\\ssdicon.webp", "Giá phải là số"},
 //giá âm
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "-25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.txt", "Giá không thể là số âm"
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "-25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\ssdicon.webp", "Giá không thể là số âm"
                 },
 //               trống tồn kho
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "", "Mainboard", "Intel", "Còn hoạt động", "Mô tả", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Số lượng phải là số"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "", "Mainboard", "Intel", "Còn hoạt động", "Mô tả", "D:\\image\\ssdicon.webp", "Số lượng phải là số"},
 //    tồn không phải số
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "abc", "Mainboard", "Intel", "Còn hoạt động", "CPU", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Số lượng phải là số"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "abc", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\ssdicon.webp", "Số lượng phải là số"},
 //        tồn kho âm
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "-50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Số lượng không thể là số âm"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "-50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\ssdicon.webp", "Số lượng không thể là số âm"},
 //                .txt
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\FPOLY\\KTNC\\test.txt", "Hình ảnh phải là file ảnh"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "CPU", "D:\\image\\test.pdf", "Hình ảnh phải là file ảnh"},
 //thành công
-                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "Mainboard MSI PRO H610M-S WIFI DDR4", "C:\\Users\\ADMIN\\Pictures\\Saved Pictures\\nen.jpg", "Bắt buộc nhập tên sản phẩm"},
+                {"Mainboard MSI PRO H610M-S WIFI DDR4", "25,000,000", "50", "Mainboard", "Intel", "Còn hoạt động", "Mainboard MSI PRO H610M-S WIFI DDR4", "D:\\image\\ssdicon.webp", "Bắt buộc nhập tên sản phẩm"},
 
         };
     }

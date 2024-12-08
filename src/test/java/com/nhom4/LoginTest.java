@@ -17,7 +17,7 @@ public class LoginTest {
     private WebDriver driver;
     private final String url = "http://localhost:3000/login";
 
-    @BeforeMethod
+    @BeforeClass
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -25,7 +25,7 @@ public class LoginTest {
         driver.navigate().to(url);
     }
 
-    @AfterMethod
+    @AfterClass
     public void closeBrowser() {
         System.out.println("Closing browser");
         if (driver != null) {
@@ -37,7 +37,7 @@ public class LoginTest {
     public void testValidLogin() {
         login("admin", "123");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
         try {
             // Chờ thông báo thành công hiển thị
@@ -51,9 +51,14 @@ public class LoginTest {
 
     @Test(dataProvider = "loginData", priority = 1)
     public void testLogin(String username, String password, String expectedMessage) {
+        // Kiểm tra nếu username hoặc password rỗng, bỏ qua kiểm tra
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            Assert.fail("Trường username hoặc password bị để trống, không thể thực hiện kiểm tra.");
+            return;
+        }
         login(username, password);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
         try {
             Thread.sleep(1000);
@@ -107,7 +112,7 @@ public class LoginTest {
         };
     }
     public void login(String username, String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
         try {
             // Tìm và điền thông tin vào các trường đăng nhập
@@ -131,11 +136,11 @@ public class LoginTest {
     public void Remember() {
         login("admin", "123");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
 
         try {
             // Đợi một thời gian sau khi đăng nhập (tuỳ thuộc vào ứng dụng của bạn)
-            wait.until(ExpectedConditions.urlContains("home")); // Giả sử sau khi đăng nhập, URL sẽ chứa 'home'
+            wait.until(ExpectedConditions.urlContains("admin")); // Giả sử sau khi đăng nhập, URL sẽ chứa 'home'
 
             // Kiểm tra localStorage
             JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;

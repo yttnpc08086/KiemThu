@@ -33,7 +33,7 @@ public class AddressTest {
 
         // Nhập thông tin đăng nhập
         usernameField.sendKeys("user"); // Thay bằng tài khoản thực tế
-        passwordField.sendKeys("123456"); // Thay bằng mật khẩu thực tế
+        passwordField.sendKeys("123"); // Thay bằng mật khẩu thực tế
 
         // Nhấn nút đăng nhập
         loginButton.click();

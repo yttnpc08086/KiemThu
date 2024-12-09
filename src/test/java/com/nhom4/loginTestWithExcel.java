@@ -112,7 +112,8 @@ public class loginTestWithExcel {
             rowStyle.setVerticalAlignment(VerticalAlignment.CENTER);
             rowStyle.setWrapText(true);
 
-            testNGResults.put("1", new Object[]{"Test Step No.", "Action", "Username", "Password", "Expected Output", "Actual Output", "Status", "Link", "Image"});
+            testNGResults.put("1", new Object[]{"Test Step No.",
+                    "Username", "Password", "Expected Output", "Actual Output", "Status", "Link", "Image"});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -138,11 +139,11 @@ public class loginTestWithExcel {
                 Thread.sleep(3000);
                 String actual = driver.getTitle();
                 if (actual.equalsIgnoreCase(expected)) {
-                    testNGResults.put(String.valueOf(index + 1), new Object[]{String.valueOf(index + 1), "TestLogin success with username and password", username, password, expected, actual, "Login success", ""});
+                    testNGResults.put(String.valueOf(index + 1), new Object[]{String.valueOf(index + 1),  username, password, expected, actual, "Login success", ""});
                 } else {
                     String path = IMAGE_DIR + "failure_" + System.currentTimeMillis() + ".png";
                     takeScreenshot(driver, path);
-                    testNGResults.put(String.valueOf(index + 1), new Object[]{String.valueOf(index + 1), "TestLogin failed with username and password", username, password, expected, actual, "Failed", path.replace("\\", "/")});
+                    testNGResults.put(String.valueOf(index + 1), new Object[]{String.valueOf(index + 1), username, password, expected, actual, "Failed", path.replace("\\", "/")});
                 }
                 index++;
             }
@@ -152,51 +153,51 @@ public class loginTestWithExcel {
     }
 
     @AfterClass
-    public void suiteTestdown() {
-        try {
-            Set<String> keyset = testNGResults.keySet();
-            int rownum = 0;
+        public void suiteTestdown() {
+            try {
+                Set<String> keyset = testNGResults.keySet();
+                int rownum = 0;
 
-            for (String key : keyset) {
-                Row row = worksheet.createRow(rownum++);
-                Object[] objArr = testNGResults.get(key);
-                int cellnum = 0;
-                for (Object obj : objArr) {
-                    Cell cell = row.createCell(cellnum++);
-                    if (obj instanceof String) {
-                        cell.setCellValue((String) obj);
-                    } else if (obj instanceof Date) {
-                        cell.setCellValue((Date) obj);
-                    } else if (obj instanceof Boolean) {
-                        cell.setCellValue((Boolean) obj);
-                    } else if (obj instanceof Double) {
-                        cell.setCellValue((Double) obj);
-                    }
+                for (String key : keyset) {
+                    Row row = worksheet.createRow(rownum++);
+                    Object[] objArr = testNGResults.get(key);
+                    int cellnum = 0;
+                    for (Object obj : objArr) {
+                        Cell cell = row.createCell(cellnum++);
+                        if (obj instanceof String) {
+                            cell.setCellValue((String) obj);
+                        } else if (obj instanceof Date) {
+                            cell.setCellValue((Date) obj);
+                        } else if (obj instanceof Boolean) {
+                            cell.setCellValue((Boolean) obj);
+                        } else if (obj instanceof Double) {
+                            cell.setCellValue((Double) obj);
+                        }
 
-                    if (obj.toString().contains("Failed") || obj.toString().contains(".png")) {
-                        try {
-                            row.setHeightInPoints(80);
-                            writeImage(obj.toString(), row, cell, worksheet);
-                            CreationHelper createHelper = worksheet.getWorkbook().getCreationHelper();
-                            XSSFHyperlink hyperlink = (XSSFHyperlink) createHelper.createHyperlink(HyperlinkType.URL);
-                            hyperlink.setAddress(obj.toString().replace("\\", "/"));
-                            cell.setHyperlink(hyperlink);
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (obj.toString().contains("Failed") || obj.toString().contains(".png")) {
+                            try {
+                                row.setHeightInPoints(80);
+                                writeImage(obj.toString(), row, cell, worksheet);
+                                CreationHelper createHelper = worksheet.getWorkbook().getCreationHelper();
+                                XSSFHyperlink hyperlink = (XSSFHyperlink) createHelper.createHyperlink(HyperlinkType.URL);
+                                hyperlink.setAddress(obj.toString().replace("\\", "/"));
+                                cell.setHyperlink(hyperlink);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                driver.quit();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            driver.quit();
-        }
 
-        try (FileOutputStream fileOut = new FileOutputStream(EXCEL_DIR + "\\TestNG_Result_" + System.currentTimeMillis() + ".xlsx")) {
-            workbook.write(fileOut);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try (FileOutputStream fileOut = new FileOutputStream(EXCEL_DIR + "\\TestNG_Result_" + System.currentTimeMillis() + ".xlsx")) {
+                workbook.write(fileOut);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }
